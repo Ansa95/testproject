@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once 'db.php';
 require_once 'taskModel.php';
 $task = new taskModel();
@@ -23,8 +24,8 @@ $taskResult = $task->get();
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
     <script src="scripts.js"></script>
-    <p>create task <a href="task.php">Back</a></p>
-    <p>create student <a href="task_create.php">Create</a></p>
+    <p><a href="welcome.html">Back</a></p>
+    <p>create Task <a href="task_create.php">Create</a></p>
 
 </head>
 
@@ -71,21 +72,22 @@ $taskResult = $task->get();
 
 if (isset($_POST['submit'])) {
     
-        if( empty($_POST['email']) || empty($_POST['password']) )
+        if( empty($_POST['title']) || empty($_POST['description']) || empty($_POST['student']))
         {
             echo "Please fillout all required fields";
         }
 
-    $email_id = $_POST["email"];
-    $password = $_POST["password"];
-    $password = hash('sha512', $password);
-    $role_id = 2;
+    $title = $_POST["title"];
+    $description = $_POST["description"];
+    $student_id =  $_POST["student"];
+    $teacher_id = $_SESSION["id"];
+    var_dump($_SESSION);
 
-    if ($student->save($email_id, $password, $role_id)) {
-        header('Location:student.php');
+    if ($task->save($title, $description, $student_id, $teacher_id)) {
+        header('Location:task.php');
     } else {
 
-        header('student_create.php');
+        header('task_create.php');
     }
 }
 ?>

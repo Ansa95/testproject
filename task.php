@@ -19,19 +19,21 @@ if ($taskResult) {
     <div class='container'>
         <table class="table table-bordered table-striped">
             <tr>
-                <td>Email</td>
+                <td>Title</td>
+                <td>Description</td>
                 <td width="70px">Delete</td>
                 <td width="70px">EDIT</td>
             </tr>
             <?php
             foreach ($taskResult as $taskDetails) {
                 echo "<form action='' method='POST'>";
-                echo "<input type='hidden' value='" . $taskDetails[0]['id'] . "' name='id' />"; //added
+                echo "<input type='hidden' value='" . $taskDetails['id'] . "' name='id' />"; //added
                 echo "<tr>";
-                echo "<td>" . $taskDetails[0]['email_id'] . "</td>";
-                echo "<td><a href='task.php?id=". $taskDetails[0]['id'] ."' class='btn btn-danger'>Delete</a></td>";
+                echo "<td>" . $taskDetails['title'] . "</td>";
+                echo "<td>" . $taskDetails['description'] . "</td>";
+                echo "<td><a href='task.php?id=". $taskDetails['id'] ."' class='btn btn-danger'>Delete</a></td>";
                
-                echo "<td><a href='task_edit.php?id=" . $taskDetails[0]['id'] . "' class='btn btn-info'>Edit</a></td>";
+                echo "<td><a href='task_edit.php?id=" . $taskDetails['id'] . "' class='btn btn-info'>Edit</a></td>";
                 echo "</tr>";
                 echo "</form>";
             }

@@ -22,6 +22,8 @@ $student = new studentModel();
 </head>
 
 <body>
+<p>create student <a href="welcome.html">Back</a></p>
+<p>create student <a href="student_create.php">Create</a></p>
     
     <div class="an">
 
@@ -33,7 +35,10 @@ $student = new studentModel();
                     <div class="col-sm-6 ">
                         <label for="uname">email:</label>
                         <input type="email" class="form-control" id="email" placeholder="Enter email" name="email"  required>
-
+                        <label for="uname">Name:</label>
+                        <input type="text" class="form-control" id="name" placeholder="Enter name" name="name"  required>
+                        <label for="uname">User Name:</label>
+                        <input type="text" class="form-control" id="user_name" placeholder="Enter user name" name="user_name"  required>
                         <label for=" pwd">Password:</label>
                         <input type="password" class="form-control" id="password" placeholder="Enter password" name="password" required>
 
@@ -55,8 +60,7 @@ $student = new studentModel();
 </body>
 
 </html>
-<p>create student <a href="student.php">Back</a></p>
-<p>create student <a href="student_create.php">Create</a></p>
+
 <?php
 
 if (isset($_POST['submit'])) {
@@ -65,13 +69,16 @@ if (isset($_POST['submit'])) {
         {
             echo "Please fillout all required fields";
         }
+        $name =  $_POST["name"];
+        $user_name =  $_POST["user_name"];
+
 
     $email_id = $_POST["email"];
     $password = $_POST["password"];
     $password = hash('sha512', $password);
     $role_id = 2;
 
-    if ($student->save($email_id, $password, $role_id)) {
+    if ($student->save($name,$user_name,$email_id, $password, $role_id)) {
         header('Location:student.php');
     } else {
 

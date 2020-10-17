@@ -18,17 +18,19 @@ class taskModel
     }
   
 
-    public function save($student_id, $teacher_id, $task_name, $description, $status)
+    public function save($title, $description, $student_id, $teacher_id)
     {
-    $sql="insert into task (`student_id`,`teacher_id`,`task_name`,`description`,`status`) values ('$student_id','$teacher_id','$task_name','$description', '$status')";
+    $sql="insert into task (`student_id`,`teacher_id`,`title`,`description`) values ('$student_id','$teacher_id','$title','$description')";
+    echo $sql;
        $result= $this->dconnect->run($sql);
        return $result;
     }
 
-    public function update($email_id, $password, $role_id, $id)
+    public function update($title, $description, $student_id, $teacher_id,$id)
     {
-    $sql="UPDATE user SET email_id='$email_id',password='$password' WHERE id=$id";
-  
+       
+    $sql="UPDATE task SET title='$title',description='$description', student_id=$student_id,teacher_id =$teacher_id WHERE id=$id";
+ 
         $this->dconnect->run($sql);
     }
 
@@ -43,6 +45,12 @@ class taskModel
     {
         $sql = "DELETE from task WHERE id=".$id."";
         $this->dconnect->run($sql);
+    }
+
+    public function getAll($id) {
+        $sql = "SELECT * from task WHERE student_id=".$id."";
+        $this->dconnect->run($sql);
+       return $this->dconnect->getResult();
     }
 
 }

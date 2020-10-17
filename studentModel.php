@@ -18,9 +18,9 @@ class studentModel
         return $this->dconnect->getResult();
     }
 
-    public function save($email_id, $password, $role_id)
+    public function save($name,$user_name,$email_id, $password, $role_id)
     {
-    $sql="insert into user (`email_id`,`password`,`role_id`) values ('$email_id','$password','$role_id')";
+    $sql="insert into user (`name`,`user_name`,`email_id`,`password`,`role_id`) values ('$name','$user_name','$email_id','$password','$role_id')";
        $result= $this->dconnect->run($sql);
        return $result;
     }
